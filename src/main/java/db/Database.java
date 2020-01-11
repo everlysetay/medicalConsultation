@@ -2,8 +2,10 @@ package main.java.db;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -15,7 +17,7 @@ public class Database {
 
 	HashMap<String, Doctor> doctors = new HashMap<String, Doctor>();
 	HashMap<String, Patient> patients = new HashMap<String, Patient>();
-	HashMap<String, List<Appointment>> appointments = new HashMap<String, List<Appointment>>();
+	List<Appointment> appointments = new ArrayList<Appointment>();
 
 	public Database(){
 		
@@ -23,20 +25,10 @@ public class Database {
 	
 	public void setDatabase(HashMap<String, Doctor> doctors, 
 			HashMap<String, Patient> patients, 
-			HashMap<String, List<Appointment>> appointments){
+			List<Appointment> appointments){
 		this.doctors = doctors;
 		this.patients = patients;
 		this.appointments = appointments;
-	}
-	
-	public Doctor getDoctorByName(String name){
-		for (Entry<String, Doctor> doctor: doctors.entrySet()){
-			Doctor doc = doctor.getValue();
-			if (doc.getName().equals(name)){
-				return doc;
-			}
-		}
-		return null;
 	}
 	
 	public Patient getPatientById(String id){
@@ -53,6 +45,24 @@ public class Database {
 		return null;
 	}
 	
+	public List<Doctor> getDoctorList(){
+		return new ArrayList<Doctor>(doctors.values());
+	}
+	
+	public Doctor getDoctorById(String id){
+		return doctors.get(id);
+	}
+	
+	public Doctor getDoctorByName(String name){
+		for (Entry<String, Doctor> doctor: doctors.entrySet()){
+			Doctor doc = doctor.getValue();
+			if (doc.getName().equals(name)){
+				return doc;
+			}
+		}
+		return null;
+	}
+	
 	public List<Appointment> getDoctorAppointmentByDay(Doctor doc, LocalDate date){
 		List<Appointment> list = new ArrayList<Appointment>();
 		
@@ -64,5 +74,32 @@ public class Database {
 		}
 		
 		return list;
+	}
+	
+	public List<Integer> getDoctorAvailableSlot(Doctor doc, LocalDate date){
+		List<Appointment> scheduled = this.getDoctorAppointmentByDay(doc, date);
+		List<Integer> list = new LinkedList<Integer>();
+		
+		//user work from 8 to 16 hrs
+		for (int i = 8; i < 16; i++){
+			list.add(i);
+		}
+		
+		for (Appointment app: scheduled){
+			list.remove(Integer.valueOf(app.getDateTime().getHour()));
+		}
+		
+		return list;
+	}
+	
+	public int getIdForNewAppointment(){
+		return appointments.size();
+	}
+	
+	public boolean addNewAppointment(Appointment app, String doctorId){
+		appointments.add(app);
+		Doctor doc = doctors.get(doctorId);
+		doc.setAppointment(app.getDateTime(), app);
+		return true;
 	}
 }

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import main.java.db.Database;
 import main.java.model.Appointment;
@@ -19,7 +18,7 @@ public class CsvImporter {
 
 	HashMap<String, Doctor> doctors = new HashMap<String, Doctor>();
 	HashMap<String, Patient> patients = new HashMap<String, Patient>();
-	HashMap<String, List<Appointment>> appointments = new HashMap<String, List<Appointment>>();
+	ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHH:mm:ss");
 	Database db = new Database();
 	
@@ -65,22 +64,14 @@ public class CsvImporter {
 						}
 						
 						String appointmentId = fields[6];
-						int id = Integer.valueOf(fields[6].replace("A", ""));
+						int id = Integer.valueOf(appointmentId.replace("A", ""));
 						LocalDateTime date = LocalDateTime.parse(fields[7], formatter);
 						
-						Appointment appointment = new Appointment(id, date, doctorId);
-						appointment.setPatientId(patientId);
-						if (!appointments.containsKey(fields[6])){
-							List<Appointment> appList = new ArrayList<Appointment>();
-							appList.add(appointment);
-							appointments.put(appointmentId, appList);
+						Appointment appointment = new Appointment(id, date, doctorId, patientId);						
+						appointments.add(appointment);
 							
-							Doctor doc = doctors.get(doctorId);
-							doc.setAppointment(date, appointment);
-						} else {
-							List<Appointment> list = appointments.get(fields[6]);
-							list.add(appointment);
-						}
+						Doctor doc = doctors.get(doctorId);
+						doc.setAppointment(date, appointment);
 						
 					} 
 					//if header, do not save

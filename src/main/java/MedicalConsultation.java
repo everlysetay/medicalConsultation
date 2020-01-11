@@ -44,9 +44,10 @@ public class MedicalConsultation {
 			
 			switch(input.toLowerCase().replace(" ", "")){
 				case "1":
-					as.getDoctorSchedule();
+					as.getDoctorSchedule(sc);
 					break;
 				case "2":
+					as.fixAppointmentByPatient(sc);
 					break;
 				case "3":
 					break;

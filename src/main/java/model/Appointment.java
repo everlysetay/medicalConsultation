@@ -1,7 +1,6 @@
 package main.java.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -10,18 +9,22 @@ public class Appointment {
 	LocalDateTime datetime;
 	String doctorId;
 	String patientId;
-	
-    DateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHH:mm:ss");
 
-    public Appointment(int id, LocalDateTime datetime, String doctorId){
+    public Appointment(int id, LocalDate date, int hour, String doctorId, String patientId){
+		LocalDateTime dt = LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), hour, 0);
+		this.id = id;
+		this.datetime = dt;
+		this.doctorId = doctorId;
+		this.patientId = patientId;
+    }
+    
+    public Appointment(int id, LocalDateTime datetime, String doctorId, String patientId){
     	this.id = id;
     	this.datetime = datetime;
     	this.doctorId = doctorId;
-    }
-    
-    public void setPatientId(String patientId){
     	this.patientId = patientId;
     }
+   
     
     public LocalDateTime getDateTime(){
     	return datetime;
