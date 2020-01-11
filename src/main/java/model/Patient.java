@@ -13,7 +13,7 @@ public class Patient extends Human{
 	}
 	
 	public String getId(){
-		return "A"+this.id;
+		return "P"+this.id;
 	}
 	
 	public String getName(){

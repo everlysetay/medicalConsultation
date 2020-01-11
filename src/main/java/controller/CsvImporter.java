@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import main.java.db.Database;
 import main.java.model.Appointment;
@@ -18,8 +19,8 @@ public class CsvImporter {
 
 	HashMap<String, Doctor> doctors = new HashMap<String, Doctor>();
 	HashMap<String, Patient> patients = new HashMap<String, Patient>();
-	HashMap<String, Appointment> appointments = new HashMap<String, Appointment>();
-	DateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHH:mm:ss");
+	HashMap<String, List<Appointment>> appointments = new HashMap<String, List<Appointment>>();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHH:mm:ss");
 	Database db = new Database();
 	
 	//return initial database of appointments
@@ -63,15 +64,22 @@ public class CsvImporter {
 							patients.put(patientId, patient);
 						}
 						
+						String appointmentId = fields[6];
+						int id = Integer.valueOf(fields[6].replace("A", ""));
+						LocalDateTime date = LocalDateTime.parse(fields[7], formatter);
+						
+						Appointment appointment = new Appointment(id, date, doctorId);
+						appointment.setPatientId(patientId);
 						if (!appointments.containsKey(fields[6])){
-							String appointmentId = fields[6];
-							int id = Integer.valueOf(fields[6].replace("A", ""));
-							Date date = dateFormat.parse(fields[7]);
+							List<Appointment> appList = new ArrayList<Appointment>();
+							appList.add(appointment);
+							appointments.put(appointmentId, appList);
 							
-							Appointment appointment = new Appointment(id, date, doctorId);
-							appointment.setPatientId(patientId);
-							
-							appointments.put(appointmentId, appointment);
+							Doctor doc = doctors.get(doctorId);
+							doc.setAppointment(date, appointment);
+						} else {
+							List<Appointment> list = appointments.get(fields[6]);
+							list.add(appointment);
 						}
 						
 					} 
