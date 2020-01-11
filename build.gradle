@@ -35,11 +35,6 @@ test {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClassName = 'medicalConsultation.App'
-}
-
 jar {
     manifest {
         attributes 'Main-Class': 'main.java.MedicalConsultation'
