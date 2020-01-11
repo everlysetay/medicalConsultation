@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 import main.java.controller.AppointmentScheduler;
 import main.java.controller.CsvImporter;
-import main.java.db.Database;
+import main.java.db.AppointmentDatabase;
+import main.java.db.DoctorDatabase;
+import main.java.db.PatientDatabase;
 
 public class MedicalConsultation {
 
@@ -16,18 +18,22 @@ public class MedicalConsultation {
 		System.out.println("=================== Welcome to Medical Consultation Booking System =====================");
 		
 		//import appointment settings -- allow other sets of data to be allowed into the system
-		Database db = new Database();
+		AppointmentDatabase appDb = new AppointmentDatabase();
+		DoctorDatabase docDb = new DoctorDatabase();
+		PatientDatabase patDb = new PatientDatabase();
 		if (args.length <= 0){
 			//read database from system path
 			Path path = Paths.get(System.getProperty("user.dir") +"/resource/data.csv");
 
 			CsvImporter ci = new CsvImporter(path);
-			db = ci.getDb();
+			appDb = ci.getAppointmentDb();
+			docDb = ci.getDoctorsDb();
+			patDb = ci.getPatientDb();
 		} else {
 			System.out.println("read from csv file");
 		}
 		
-		AppointmentScheduler as = new AppointmentScheduler(db);
+		AppointmentScheduler as = new AppointmentScheduler(appDb, docDb, patDb);
 		//take show main menu
 		while (!end){	
 			Scanner sc = new Scanner(System.in);
@@ -50,8 +56,7 @@ public class MedicalConsultation {
 					as.fixAppointmentByPatient(sc);
 					break;
 				case "3":
-					break;
-				case "admin-hidden":
+					as.cancelAppointment(sc);
 					break;
 				case "esc":
 					end = true;

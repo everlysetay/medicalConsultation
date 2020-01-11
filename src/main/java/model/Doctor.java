@@ -8,7 +8,7 @@ public class Doctor {
 	
 	int id;
 	String name;
-	LinkedHashMap<LocalDateTime, Appointment> list = new LinkedHashMap<LocalDateTime, Appointment>();
+//	LinkedHashMap<LocalDateTime, Appointment> list = new LinkedHashMap<LocalDateTime, Appointment>();
 
 	public Doctor(int id, String name){
 		this.id = id;
@@ -23,11 +23,15 @@ public class Doctor {
 		return name;
 	}
 	
-	public void setAppointment(LocalDateTime datetime, Appointment app){
-		this.list.put(datetime, app);
-	}
-	
-	public HashMap<LocalDateTime, Appointment> getAppointmentList(){
-		return list;
-	}
+//	public void setAppointment(LocalDateTime datetime, Appointment app){
+//		this.list.put(datetime, app);
+//	}
+//	
+//	public void removeAppointment(Appointment app){
+//		list.remove(app.getDateTime());
+//	}
+//	
+//	public HashMap<LocalDateTime, Appointment> getAppointmentList(){
+//		return list;
+//	}
 }

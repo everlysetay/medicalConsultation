@@ -30,7 +30,11 @@ public class Appointment {
     	return datetime;
     }
     
-    public String getPatient(){
+    public String getPatientId(){
     	return patientId;
+    }
+    
+    public String getDoctorId(){
+    	return doctorId;
     }
 }

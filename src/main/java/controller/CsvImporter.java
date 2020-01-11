@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.java.db.Database;
+import main.java.db.AppointmentDatabase;
+import main.java.db.DoctorDatabase;
+import main.java.db.PatientDatabase;
 import main.java.model.Appointment;
 import main.java.model.Doctor;
 import main.java.model.Patient;
@@ -20,15 +22,25 @@ public class CsvImporter {
 	HashMap<String, Patient> patients = new HashMap<String, Patient>();
 	ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHH:mm:ss");
-	Database db = new Database();
+	AppointmentDatabase ad = new AppointmentDatabase();
+	DoctorDatabase dd = new DoctorDatabase();
+	PatientDatabase pd = new PatientDatabase();
 	
 	//return initial database of appointments
 	public CsvImporter(Path path){
 		this.extractInformation(path);
 	}
 	
-	public Database getDb(){
-		return db;
+	public AppointmentDatabase getAppointmentDb(){
+		return ad;
+	}
+	
+	public DoctorDatabase getDoctorsDb(){
+		return dd;
+	}
+	
+	public PatientDatabase getPatientDb(){
+		return pd;
 	}
 	
 	public void extractInformation(Path path){
@@ -69,10 +81,6 @@ public class CsvImporter {
 						
 						Appointment appointment = new Appointment(id, date, doctorId, patientId);						
 						appointments.add(appointment);
-							
-						Doctor doc = doctors.get(doctorId);
-						doc.setAppointment(date, appointment);
-						
 					} 
 					//if header, do not save
 				}				
@@ -85,6 +93,8 @@ public class CsvImporter {
 			System.out.println("Unable to load CSV data file");
 		}
 		
-		db.setDatabase(doctors, patients, appointments);
+		ad.setDatabase(appointments);
+		dd.setDatabase(doctors);
+		pd.setDatabase(patients);
 	}
 }
