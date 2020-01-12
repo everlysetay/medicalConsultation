@@ -23,18 +23,18 @@ public class MedicalConsultation {
 		AppointmentDatabase appDb = new AppointmentDatabase();
 		DoctorDatabase docDb = new DoctorDatabase();
 		PatientDatabase patDb = new PatientDatabase();
-		System.out.println(args.length);
-		if (args.length <= 0){
-			//read database from system path
-			Path path = Paths.get(System.getProperty("user.dir") +"/resource/data.csv");
-
-			CsvImporter ci = new CsvImporter(path);
-			appDb = ci.getAppointmentDb();
-			docDb = ci.getDoctorsDb();
-			patDb = ci.getPatientDb();
+		Path path = null;
+		if (args.length > 0){
+			path = Paths.get(System.getProperty("user.dir") + "/" + args[0]);
 		} else {
-			System.out.println("read from csv file");
+			//read database from system path
+			path = Paths.get(System.getProperty("user.dir") +"/resource/data.csv");
 		}
+		
+		CsvImporter ci = new CsvImporter(path);
+		appDb = ci.getAppointmentDb();
+		docDb = ci.getDoctorsDb();
+		patDb = ci.getPatientDb();
 		
 		ScheduleAppointment as = new ScheduleAppointment(appDb, docDb, patDb);
 		CreateAppointment ca = new CreateAppointment(appDb, docDb, patDb);
