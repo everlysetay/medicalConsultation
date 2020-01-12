@@ -67,15 +67,11 @@ public class AppointmentDatabase {
 	
 	public boolean addNewAppointment(Appointment app, String doctorId){
 		appointments.add(app);
-//		Doctor doc = doctors.get(doctorId);
-//		doc.setAppointment(app.getDateTime(), app);
 		return true;
 	}
 	
 	public boolean removeAppointment(Appointment app, String doctorId){
 		appointments.remove(app);
-//		Doctor doc = doctors.get(doctorId);
-		
 		return true;
 	}
 }

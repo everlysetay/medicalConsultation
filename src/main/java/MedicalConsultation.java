@@ -7,6 +7,7 @@ import java.util.Scanner;
 import main.java.controller.CancelAppointment;
 import main.java.controller.CreateAppointment;
 import main.java.controller.CsvImporter;
+import main.java.controller.GetAppointmentForDoctor;
 import main.java.controller.ScheduleAppointment;
 import main.java.db.AppointmentDatabase;
 import main.java.db.DoctorDatabase;
@@ -36,9 +37,10 @@ public class MedicalConsultation {
 		docDb = ci.getDoctorsDb();
 		patDb = ci.getPatientDb();
 		
-		ScheduleAppointment as = new ScheduleAppointment(appDb, docDb, patDb);
-		CreateAppointment ca = new CreateAppointment(appDb, docDb, patDb);
-		CancelAppointment cancel = new CancelAppointment(appDb, docDb, patDb);
+		ScheduleAppointment sa = new ScheduleAppointment(appDb, docDb, patDb);
+		GetAppointmentForDoctor ad = new GetAppointmentForDoctor();
+		CreateAppointment ca = new CreateAppointment();
+		CancelAppointment cancel = new CancelAppointment();
 		
 		//take show main menu
 		while (!end){	
@@ -56,13 +58,16 @@ public class MedicalConsultation {
 			
 			switch(input.toLowerCase().replace(" ", "")){
 				case "1":
-					as.getDoctorSchedule(sc);
+					ad.getDoctorSchedule(sc, sa);
+					System.out.println();
 					break;
 				case "2":
-					ca.fixAppointmentByPatient(sc);
+					ca.fixAppointmentByPatient(sc, sa);
+					System.out.println();
 					break;
 				case "3":
-					cancel.cancelAppointment(sc);
+					cancel.cancelAppointment(sc, sa);
+					System.out.println();
 					break;
 				case "esc":
 					end = true;
