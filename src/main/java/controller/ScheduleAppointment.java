@@ -136,7 +136,7 @@ public class ScheduleAppointment {
 		}
 	}
 	
-	public Appointment getPatientTimeWithDoctor(Scanner sc, Doctor doc, LocalDate date, Patient pat) throws Exception{
+	public Appointment getAppointmentWithDoctorForPatient(Scanner sc, Doctor doc, LocalDate date, Patient pat) throws Exception{
 		Appointment app = null;
 		boolean validSlot = false;
 		List<Appointment> appList = appDb.getDoctorAppointmentByDay(doc, date, pat);
@@ -147,7 +147,7 @@ public class ScheduleAppointment {
 			while (!validSlot) {
 				System.out.println(pf.printAppointmentList(appList, patDb));
 				
-				System.out.print("Please select the S/N you would like to cancel: ");
+				System.out.print("Please select the appointment S/N that you would like to edit: ");
 				String input = sc.nextLine();
 				
 				if (input.equals("esc"))
@@ -181,9 +181,13 @@ public class ScheduleAppointment {
 	
 	public boolean getDoctorAppointmentList(Doctor doc,LocalDate date){
 		List<Appointment> app = appDb.getDoctorAppointmentByDay(doc, date, null);
-		System.out.println();
-		System.out.println("Schedule for " + doc.getName() + " on " + date.toString() + ":");
-		System.out.println(pf.printAppointmentList(app, patDb));
-		return true;
+		if (app.size() > 0) {
+			System.out.println();
+			System.out.println("Schedule for " + doc.getName() + " on " + date.toString() + ":");
+			System.out.println(pf.printAppointmentList(app, patDb));
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

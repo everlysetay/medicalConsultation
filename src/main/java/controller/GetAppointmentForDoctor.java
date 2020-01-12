@@ -27,6 +27,9 @@ public class GetAppointmentForDoctor {
 			return;
 		}
 		
-		sa.getDoctorAppointmentList(doc, date);
+		boolean result = sa.getDoctorAppointmentList(doc, date);
+		if (!result){
+			System.out.println("No schedule for " + doc.getName() + " on "+ date);
+		}
 	}
 }

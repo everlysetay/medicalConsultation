@@ -44,7 +44,7 @@ public class CancelAppointment {
 		
 		Appointment app;
 		try {
-			app = sa.getPatientTimeWithDoctor(sc, doc, date, pat);
+			app = sa.getAppointmentWithDoctorForPatient(sc, doc, date, pat);
 		} catch (Exception e){
 			return;
 		}
