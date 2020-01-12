@@ -52,7 +52,7 @@ public class CancelAppointment {
 		if (app != null) {
 			boolean result = sa.cancelAppointment(sc, doc, app);
 			if (result){
-				System.out.println("Appointment with " + doc.getName() + " on " + app.getDateTime() + " cancelled");
+				System.out.println("Appointment with " + doc.getName() + " on " + app.getDateTime().toLocalDate() + " " + app.getDateTime().toLocalTime().getHour() + ":00 cancelled");
 			} else {
 				System.out.println("Return back to main menu");
 				return;

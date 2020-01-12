@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 import main.java.model.Appointment;
 import main.java.model.Doctor;
@@ -26,7 +27,7 @@ public class AppointmentDatabase {
 	}
 	
 	public List<Appointment> getDoctorAppointmentByDay(Doctor doc, LocalDate date, Patient pat){
-		LinkedHashMap<LocalDateTime, Appointment> list = new LinkedHashMap<LocalDateTime, Appointment>();
+		TreeMap<LocalDateTime, Appointment> list = new TreeMap<LocalDateTime, Appointment>();
 		
 		for (Appointment app: appointments) {
 			if (app.getDoctorId().equals(doc.getId())){

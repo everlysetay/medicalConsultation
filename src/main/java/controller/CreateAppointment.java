@@ -49,7 +49,7 @@ public class CreateAppointment {
 		
 		boolean result = sa.scheduleAppointment(sc, date, time, doc, pat);
 		if (result){
-			System.out.println("Appointment made with " + doc.getName() + " on " + date + " " + time);
+			System.out.println("Appointment made with " + doc.getName() + " on " + date + " " + time + ":00");
 		}	else {
 			return;
 		}
