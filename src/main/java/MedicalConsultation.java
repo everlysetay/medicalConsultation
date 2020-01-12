@@ -23,6 +23,7 @@ public class MedicalConsultation {
 		AppointmentDatabase appDb = new AppointmentDatabase();
 		DoctorDatabase docDb = new DoctorDatabase();
 		PatientDatabase patDb = new PatientDatabase();
+		System.out.println(args.length);
 		if (args.length <= 0){
 			//read database from system path
 			Path path = Paths.get(System.getProperty("user.dir") +"/resource/data.csv");

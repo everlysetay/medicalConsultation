@@ -28,6 +28,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+application {
+    // Define the main class for the application.
+    mainClassName = 'MedicalConsultation'
+}
+
+
 test {
     //we want display the following test events
     testLogging{
