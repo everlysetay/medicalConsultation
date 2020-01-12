@@ -61,7 +61,7 @@ medicalConsultation $ ./scripts/medical_consultation
     ├── bin                     
     ├── build                   # Compiled files 
     ├── build.gradle            # Program build structure
-    ├── gradle  				        # Gradle library file to do compilation      
+    ├── gradle  		# Gradle library file to do compilation      
     ├── gradlew
     ├── lib                     # Contain additional junit.jar for ecplise
     ├── README.md   
@@ -76,7 +76,7 @@ medicalConsultation $ ./scripts/medical_consultation
 The actual source files and Junit test source files of the software project `parking_lot/src` are stored in the folder structure.
 
 	.
-    ├── main   									          # Actual Source files for MedicalConsultation
+    ├── main   							# Actual Source files for MedicalConsultation
     │   └── java 
     │       ├── controller
     │       │   ├── CancelAppointment.java
