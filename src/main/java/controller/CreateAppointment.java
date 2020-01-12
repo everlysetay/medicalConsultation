@@ -31,7 +31,7 @@ public class CreateAppointment {
 		System.out.println("Which doctor would you like to fix an appointment with: ");
 		//print doctor list
 		List<Doctor> list = docDb.getDoctorList();
-		pf.printDoctorList(list);
+		System.out.println(pf.printDoctorList(list));
 		
 		
 		System.out.print("Select ID: ");
@@ -46,7 +46,7 @@ public class CreateAppointment {
 			LocalDate requiredDate = LocalDate.parse(keyedDate, formatter);
 			System.out.print("Please choose a following timeslot for " + requiredDate + " :");
 			List<Integer> timeslot = appDb.getDoctorAvailableSlot(doc, requiredDate);
-			pf.printTimeSlot(timeslot);
+			System.out.println(pf.printTimeSlot(timeslot));
 			
 			System.out.print("Select timeslot: ");
 			String slot = sc.nextLine();

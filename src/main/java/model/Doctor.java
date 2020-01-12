@@ -1,14 +1,9 @@
 package main.java.model;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
 public class Doctor {
 	
 	int id;
 	String name;
-//	LinkedHashMap<LocalDateTime, Appointment> list = new LinkedHashMap<LocalDateTime, Appointment>();
 
 	public Doctor(int id, String name){
 		this.id = id;
@@ -22,16 +17,4 @@ public class Doctor {
 	public String getName(){
 		return name;
 	}
-	
-//	public void setAppointment(LocalDateTime datetime, Appointment app){
-//		this.list.put(datetime, app);
-//	}
-//	
-//	public void removeAppointment(Appointment app){
-//		list.remove(app.getDateTime());
-//	}
-//	
-//	public HashMap<LocalDateTime, Appointment> getAppointmentList(){
-//		return list;
-//	}
 }

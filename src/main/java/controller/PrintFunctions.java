@@ -10,38 +10,49 @@ import main.java.model.Patient;
 
 public class PrintFunctions {
 
-	public void printDoctorList(List<Doctor> list){
-		System.out.println("ID	Name");
+	public String printDoctorList(List<Doctor> list){
+		String result = "ID\tName\n";
 		for (Doctor doc : list){
-			System.out.println(doc.getId() + "\t" + doc.getName());
+			result += doc.getId() + "\t" + doc.getName() + "\n";
 		}
-		System.out.println();
+		return result;
 	}
 	
-	public void printAppointmentList(List<Appointment> app, PatientDatabase patDb){
+	public String printAppointmentList(List<Appointment> app, PatientDatabase patDb){
 		int count = 1;
+		String result = "";
 		if (app.size() > 0){
-			System.out.println("S/N		Time		Name		Age");
+			result += "S/N		Time		Name		Age\n";
 			for (Appointment appointment: app){
 				Patient patient = patDb.getPatientById(appointment.getPatientId());
-				LocalDateTime datetime = appointment.getDateTime();
-				System.out.println(count + "\t\t" +datetime.toLocalTime() + "\t\t" + patient.getName() + "\t\t" + patient.getAge());
+				if (patient != null){
+					//patient should not be null
+					LocalDateTime datetime = appointment.getDateTime();
+					result += count + "\t\t" +datetime.toLocalTime() + "\t\t" + patient.getName() + "\t\t" + patient.getAge()+"\n";
+					count++;
+				}	else {
+					LocalDateTime datetime = appointment.getDateTime();
+					result += count + "\t\t" +datetime.toLocalTime() + "\n";
+				}
+			}
+		} else {
+			return "No appointment have been made";
+		}
+		return result;
+	}
+	
+	public String printTimeSlot(List<Integer> list){
+		String result = "";
+		if (list.size() > 0){
+			result += "Slot	Time\n";
+			int count = 1;
+			for (Integer str: list){
+				result += count + "\t" + str + ":00\n";
 				count++;
 			}
 		} else {
-			System.out.println("No appointment have been made");
+			return "No timeslot available, please select another day";
 		}
-		System.out.println();
-	}
-	
-	public void printTimeSlot(List<Integer> list){
-		System.out.println("Slot	Time");
-		int count = 1;
-		for (Integer str: list){
-			System.out.println(count + "\t" + str + ":00");
-			count++;
-		}
-		
-		System.out.println();
+		return result;
 	}
 }

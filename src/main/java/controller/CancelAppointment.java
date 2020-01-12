@@ -31,7 +31,7 @@ public class CancelAppointment {
 		System.out.println("Which doctor would you like to cancel an appointment with: ");
 		//print doctor list
 		List<Doctor> list = docDb.getDoctorList();
-		pf.printDoctorList(list);
+		System.out.println(pf.printDoctorList(list));
 		
 		
 		System.out.print("Select ID: ");
@@ -57,7 +57,7 @@ public class CancelAppointment {
 		if (appList.size() < 1) {
 			System.out.println("You do not have any appointment on this day");
 		} else {
-			pf.printAppointmentList(appList, patDb);
+			System.out.println(pf.printAppointmentList(appList, patDb));
 			
 			System.out.print("Please select the S/N you would like to cancel: ");
 			String slot = sc.nextLine();

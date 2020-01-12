@@ -31,13 +31,13 @@ public class ScheduleAppointment {
 		boolean validDoc = false;
 		Doctor doc = null;
 		while (!validDoc){
-			System.out.print("Please input the doctor's name: " );
-			String doctorName = sc.nextLine(); 
+			System.out.print("Please input the doctor's id: " );
+			String doctorId = sc.nextLine(); 
 			
-			if (doctorName.equals("esc"))
+			if (doctorId.equals("esc"))
 				return;
 			
-			doc = docDb.getDoctorByName(doctorName);
+			doc = docDb.getDoctorById(doctorId);
 			if (doc == null){
 				System.out.println("Invalid doctor inputted");
 			} else {
@@ -59,7 +59,7 @@ public class ScheduleAppointment {
 				List<Appointment> app = appDb.getDoctorAppointmentByDay(doc, date, null);
 				System.out.println();
 				System.out.println("Schedule for " + doc.getName() + " on " + date.toString() + ":");
-				pf.printAppointmentList(app, patDb);
+				System.out.println(pf.printAppointmentList(app, patDb));
 				
 				validDate = true;
 				
