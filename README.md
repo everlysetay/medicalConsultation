@@ -3,13 +3,14 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Assumptions](#assumptions)
-- [Setup](#setup)
-- [Usage](#usage)
+- [Program Dependency](#program-dependency)
+- [Running the program](#running-the-program)
 - [Folder Structure Conventions](#folder-structure-conventions)
 - [Coding Convention](#coding-convention)
+- [Improvments](#improvements)
 
 ### Introduction
-`medicalConsultation` contains source code written in Java™ Programming Language program coupled with Junit test cases for valdation to build an appointment system.
+`medicalConsultation` contains source code written in Java™ Programming Language program coupled with Junit test cases for valdation to build an appointment booking system.
 
 This project requires [Gradle to be installed](https://gradle.org/), followed by some usage steps listed below.
 
@@ -26,29 +27,36 @@ This project requires [Gradle to be installed](https://gradle.org/), followed by
 10. System to be built without SQL database
 11. System should allow other sets of csv input other than the default provided data.
 
-### Setup
+### Program Dependency
 
 First, install [Homebrew](https://brew.sh/) unto the machine. Then run the following commands to install [Gradle](https://gradle.org/) under the `medicalConsultation` dir.
 ```
 medicalConsultation $ brew install gradle
-==> Installing gradle 
+==> Installing gradle
 ...
 ...
 🍺  /usr/local/Cellar/gradle/5.4.1: 13,767 files, 235.4MB, built in 1 minute 23 seconds
 
 ```
 
-### Usage
 
-You can compile and view the test cases result of the program `medicalConsultation` by running the following command. Upon completion of the command execution, you can see the build dir being generated under the `medicalConsultation`. 
+### Running the Program
+
+You can compile and view the test cases result of the program `medicalConsultation` by running the following command. Upon completion of the command execution, you can see the build dir being generated under the `medicalConsultation`.
 ```
 medicalConsultation $ ./scripts/setup
 ```
 
-You can execute the program in command line by running the following commands in the `medicalConsultation` dir. 
+You can execute the program in command line by running the following commands in the `medicalConsultation` dir.
 
 ```
 medicalConsultation $ ./scripts/medical_consultation
+```
+
+In the event that you would like to manually run the commands, please run the commands as follows:
+```
+medicalConsultation $ gradle build
+medicalConsultation $ java -jar build/libs/medicalConsulation.jar
 ```
 
 ### Folder Structure Conventions
@@ -58,26 +66,26 @@ medicalConsultation $ ./scripts/medical_consultation
 > The current directory structure and naming conventions for `medicalConsultation`
 
     .
-    ├── bin                     
-    ├── build                   # Compiled files 
+    ├── bin
+    ├── build                   # Compiled files
     ├── build.gradle            # Program build structure
-    ├── gradle  		# Gradle library file to do compilation      
+    ├── gradle                  # Gradle library file to do compilation
     ├── gradlew
     ├── lib                     # Contain additional junit.jar for ecplise
-    ├── README.md   
+    ├── README.md
     ├── resource                # CSV file to load into system, as well as test input
-    ├── scripts		              # Provided functional_specs to enable more testing scenarios
-    ├── settings.gradle     
+    ├── scripts                 # Provided functional_specs to enable more testing scenarios
+    ├── settings.gradle
     └── src                     # Source files and Junit test files
-    
+
 
 #### Source files and Automated test files
 
-The actual source files and Junit test source files of the software project `parking_lot/src` are stored in the folder structure.
+The actual source files and Junit test source files of the software project `medicalConsulation/src` are stored in the folder structure.
 
-	.
-    ├── main   							# Actual Source files for MedicalConsultation
-    │   └── java 
+    .
+    ├── main                          # Actual Source files for MedicalConsultation
+    │   └── java
     │       ├── controller
     │       │   ├── CancelAppointment.java
     │       │   ├── CreateAppointment.java
@@ -95,8 +103,8 @@ The actual source files and Junit test source files of the software project `par
     │       │   ├── Human.java
     │			  │	  └── Patient.java
     │       └── MedicalConsultation.java
-    ├── test                    				# Test files of Medical Consultation reflecting main
-    │   └── java 
+    ├── test                          # Test files of Medical Consultation reflecting main
+    │   └── java
     │       ├── controller
     │       │   ├── TestCsvImporter.java
     │       │   ├── TestPrintFunction.java
@@ -105,4 +113,11 @@ The actual source files and Junit test source files of the software project `par
 
 ### Coding Convention
 
-The actual source files of `medicalConsultation` are written in CamelCase Notation for source code in the Java™ Programming Language. 
+The actual source files of `medicalConsultation` are written in CamelCase Notation for source code in the Java™ Programming Language.
+
+### Improvements
+The following are some self assessment while writing through the program:
+- `ScheduleAppointment` can be more well thought out, hence to be able to shorten the amount of functions as well as line of codes in the classes further
+- TDD can be more well done. Testes can be written first so as to be able to get all edge cases first, instead of further refactoring later for testes.
+- Implementation can be cleaner to show only server implementation without text walkthrough
+
