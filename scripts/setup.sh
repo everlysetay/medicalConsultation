@@ -11,8 +11,8 @@
 #brew install gradle
 
 #Build/Compile
-grade assemble
-grade build
+gradle assemble
+gradle build
 
 #Run Junit Tests
 gradle test
