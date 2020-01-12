@@ -15,6 +15,10 @@ public class DoctorDatabase {
 		this.doctors = doctors;
 	}
 	
+	public int getDbSize(){
+		return doctors.size();
+	}
+	
 	public List<Doctor> getDoctorList(){
 		return new ArrayList<Doctor>(doctors.values());
 	}

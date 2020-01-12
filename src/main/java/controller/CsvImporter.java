@@ -54,7 +54,7 @@ public class CsvImporter {
 					if (fields.length == 8) {
 						//correct input
 						String doctorId = fields[0];
-						if (!doctors.containsKey(fields[0])) {
+						if (!doctors.containsKey(fields[0]) && doctorId.contains("D")) {
 							int id = Integer.valueOf(doctorId.replace("D", ""));
 							String name = fields[1];
 							Doctor doc = new Doctor(id, name);
@@ -63,7 +63,7 @@ public class CsvImporter {
 						} 
 						
 						String patientId = fields[2];
-						if (!patients.containsKey(fields[2])){
+						if (!patients.containsKey(fields[2]) && patientId.contains("P")){
 							int id = Integer.valueOf(patientId.replace("P", ""));
 							String name = fields[3];
 							int age = Integer.valueOf(fields[4]);
@@ -89,7 +89,6 @@ public class CsvImporter {
 			
 			
 		} catch (Exception e){
-			System.out.println(e);
 			System.out.println("Unable to load CSV data file");
 		}
 		

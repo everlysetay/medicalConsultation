@@ -18,7 +18,7 @@ import main.java.model.Patient;
 
 public class TestPrintFunctions {
 
-PrintFunctions pf;
+	PrintFunctions pf;
 	
 	@Before
 	public void init(){

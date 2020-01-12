@@ -21,6 +21,10 @@ public class AppointmentDatabase {
 		this.appointments = appointments;
 	}
 
+	public int getDbSize(){
+		return appointments.size();
+	}
+	
 	public List<Appointment> getDoctorAppointmentByDay(Doctor doc, LocalDate date, Patient pat){
 		LinkedHashMap<LocalDateTime, Appointment> list = new LinkedHashMap<LocalDateTime, Appointment>();
 		

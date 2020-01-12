@@ -12,6 +12,10 @@ public class PatientDatabase {
 		this.patients = patients;
 	}
 	
+	public int getDbSize(){
+		return patients.size();
+	}
+	
 	public Patient getPatientById(String id){
 		return patients.get(id);
 	}
