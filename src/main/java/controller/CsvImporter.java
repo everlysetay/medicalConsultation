@@ -82,7 +82,7 @@ public class CsvImporter {
 						Appointment appointment = new Appointment(id, date, doctorId, patientId);						
 						appointments.add(appointment);
 					} 
-					//if header, do not save
+					//if header, do not save -- skip line
 				}				
 				line = br.readLine();
 			}

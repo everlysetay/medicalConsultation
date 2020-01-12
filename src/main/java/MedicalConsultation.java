@@ -4,8 +4,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import main.java.controller.AppointmentScheduler;
+import main.java.controller.CancelAppointment;
+import main.java.controller.CreateAppointment;
 import main.java.controller.CsvImporter;
+import main.java.controller.ScheduleAppointment;
 import main.java.db.AppointmentDatabase;
 import main.java.db.DoctorDatabase;
 import main.java.db.PatientDatabase;
@@ -33,7 +35,10 @@ public class MedicalConsultation {
 			System.out.println("read from csv file");
 		}
 		
-		AppointmentScheduler as = new AppointmentScheduler(appDb, docDb, patDb);
+		ScheduleAppointment as = new ScheduleAppointment(appDb, docDb, patDb);
+		CreateAppointment ca = new CreateAppointment(appDb, docDb, patDb);
+		CancelAppointment cancel = new CancelAppointment(appDb, docDb, patDb);
+		
 		//take show main menu
 		while (!end){	
 			Scanner sc = new Scanner(System.in);
@@ -53,10 +58,10 @@ public class MedicalConsultation {
 					as.getDoctorSchedule(sc);
 					break;
 				case "2":
-					as.fixAppointmentByPatient(sc);
+					ca.fixAppointmentByPatient(sc);
 					break;
 				case "3":
-					as.cancelAppointment(sc);
+					cancel.cancelAppointment(sc);
 					break;
 				case "esc":
 					end = true;
@@ -66,6 +71,7 @@ public class MedicalConsultation {
 			}
 			
 			if (end){
+				//save current db into csv
 				sc.close();
 			}
 		}
